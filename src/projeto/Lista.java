@@ -25,12 +25,14 @@ public class Lista {
 
             System.out.println("=====================================");
             System.out.println("-----------LISTA DE TAREFAS----------");
+            System.out.println("=====================================");
             System.out.println("(1): ADICIONAR TAREFA ");//OK
             System.out.println("(2): REMOVER TAREFA");//OK
             System.out.println("(3): CONCLUIR TAREFA");//OK
             System.out.println("(4): MOSTRAR AS TAREFAS");
             System.out.println("(5): MODIFICAR");//OK
             System.out.println("(6): SAIR");//OK
+            System.out.println("");//pula.uma.linha
             System.out.println("=====================================");
             System.out.println("Digite um número para selecionar:");
             System.out.println("=====================================");
@@ -39,34 +41,13 @@ public class Lista {
 
             // 1.ADICIONAR
             if (selecionar == 1) {
-                adicionar(lista, tamanhoLista);
+                	adicionar(lista, tamanhoLista);
 
             }
 
             // 2.REMOVER.TAREFA
             if (selecionar == 2) {
-            	  System.out.println("=====================================");
-                  System.out.println("-----------LISTA DE TAREFAS----------");
-                  System.out.println("=====================================");
-	              System.out.println("");//pular.mais.de.uma.linha
-	              System.out.println("=====================================");
-	              System.out.println("-----------REMOVER TAREFA------------");
-	              System.out.println("=====================================");
-
-                System.out.println("Digite a posição da tarefa:");
-                int remover = teclado.nextInt();
-
-                if (remover >= 0 && remover < tamanhoLista) {
-
-                    lista[remover] = null;
-
-                    System.out.println("Tarefa removida!");
-
-                } else {
-
-                    System.out.println("Posição inválida!");
-
-                }
+            		removerTarefa(lista, tamanhoLista);
 
             }
             
@@ -79,20 +60,15 @@ public class Lista {
             //4.MOSTRAR.TAREFA
             if(selecionar == 4) {
             	System.out.println("===================================");
-            	System.out.println("----------LISTA DE TAREFAS---------");
-            	System.out.println("===================================");
-	            System.out.println("");//pular.mais.de.uma.linha
-            	System.out.println("===================================");
 	            System.out.println("-----------MOSTRAR TAREFAS----------");
 	            System.out.println("===================================");
-            	
             	mostrarLista(lista);//chamada.de.metodo
 
             }
             
             //5.MODIFICAR.TAREFA
             if(selecionar == 5) {
-            	System.out.println("Qual tarefa você deseja concluir (número da tarefa)?: ");
+            	System.out.println("Qual tarefa você deseja modificar?: ");
             	int numero = teclado.nextInt();
             	modificar(lista, tamanhoLista);
             }
@@ -110,13 +86,8 @@ public class Lista {
 
     // PASSO1-ADICIONAR.TAREFA
     public static void adicionar(String[] lista, int tamanhoLista) {
+    	Scanner teclado = new Scanner(System.in);
 
-        Scanner teclado = new Scanner(System.in);
-
-        System.out.println("=====================================");
-        System.out.println("-----------LISTA DE TAREFAS----------");
-        System.out.println("=====================================");
-        System.out.println("");//pular.mais.de.uma.linha
         System.out.println("==============================");
         System.out.println("-------ADICIONAR TAREFA-------");
         System.out.println("==============================");
@@ -124,27 +95,41 @@ public class Lista {
         // Adicionar.as.tarefas
         for (int i = 0; i < tamanhoLista; i++) {
 
-            System.out.println("Digite a sua tarefa:");
+            System.out.println("Digite a sua tarefa" +  (i)+ ":");//mostar.o.numero.na.tabela
 
             lista[i] = teclado.nextLine();
 
         }
 
-        // Mostrar.as.tarefas
-        for (int i = 0; i < tamanhoLista; i++) {
-
-            System.out.println(lista[i]);
-
-        }
 
     }
+    
+    //PASSO2-REMOVER.TAREFA
+    public static void removerTarefa(String[] lista, int tamanhoLista) {
+    	Scanner teclado = new Scanner(System.in);
+    	
+    	System.out.println("Digite a posição da tarefa:");
+        int remover = teclado.nextInt();
+
+        if (remover >= 0 && remover < tamanhoLista) {
+
+            lista[remover] = null;
+            System.out.println("Tarefa removida!");
+
+        } else {
+
+            System.out.println("Posição inválida!");
+
+        }
+    }
+    
     
     //PASSO3-CONCLUIR.TAREFA
     public static void concluir(String[] lista, int numero) {
     	int indice = numero - 1;
     	
     	if (indice >= 0 && indice < lista.length && lista[indice] != null) {
-    		lista[indice] = lista[indice] + " [OK]";
+    		lista[indice] = lista[indice] + " [X]";
     	
     	}else{
     		System.out.println("Tarefa não encontrada ou posição vazia!");
@@ -155,7 +140,7 @@ public class Lista {
     //4.MOSTRAR.TAREFA
     public static void mostrarLista(String[] lista) {
     	for (int i = 0; i < lista.length; i++) {
-    		System.out.println(i + "-" + lista[i]);
+    		System.out.println( i + "- " + lista[i]);
     	}
     	
     }
@@ -164,12 +149,8 @@ public class Lista {
     public static void modificar(String[] lista, int tamanhoLista) {
     	Scanner teclado = new Scanner(System.in);
 
-        System.out.println("=====================================");
-        System.out.println("-----------LISTA DE TAREFAS----------");
-        System.out.println("=====================================");
-        System.out.println("");//pular.mais.de.uma.linha
         System.out.println("==============================");
-        System.out.println("---------MODIFICAR------------");
+        System.out.println("------MODIFICAR TAREFAS-----");
         System.out.println("==============================");
         
         System.out.println("Digite a posição da tarefa ");
