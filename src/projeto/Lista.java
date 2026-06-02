@@ -4,8 +4,8 @@ import java.util.Scanner;
 
 public class Lista {
 
-    //PASSO1-MENU.PRINCIPAL
-	public static void main(String[] args) {
+    // PASSO1-MENU.PRINCIPAL
+    public static void main(String[] args) {
 
         Scanner teclado = new Scanner(System.in);
 
@@ -18,29 +18,64 @@ public class Lista {
 
         tamanhoLista = teclado.nextInt();
 
-        //mantem.o.programa.funcionando
-        while (selecionar != 4) {
+        String[] lista = new String[tamanhoLista];
+
+        // mantem.o.programa.funcionando
+        while (selecionar != 5) {
 
             System.out.println("=====================================");
             System.out.println("-----------LISTA DE TAREFAS----------");
-            System.out.println("(1): ADICIONAR TAREFA ");
-            System.out.println("(2): REMOVER TAREFA");
-            System.out.println("(3): MODIFICAR");
-            System.out.println("(4): SAIR");
+            System.out.println("(1): ADICIONAR TAREFA ");//OK
+            System.out.println("(2): REMOVER TAREFA");//OK
+            System.out.println("(3): CONCLUIR TAREFA");
+            System.out.println("(4): MODIFICAR");//NÃO FEITO!
+            System.out.println("(5): SAIR");//OK
             System.out.println("=====================================");
             System.out.println("Digite um número para selecionar:");
             System.out.println("=====================================");
 
             selecionar = teclado.nextInt();
 
+            // 1.ADICIONAR
             if (selecionar == 1) {
 
-                adicionar(selecionar, tamanhoLista);
+                adicionar(lista, tamanhoLista);
 
             }
 
-            //Enecerra.o.programa
-            if (selecionar == 4) {
+            // 2.REMOVER.TAREFA
+            if (selecionar == 2) {
+
+                System.out.println("=====================================");
+                System.out.println("-----------REMOVER TAREFA------------");
+                System.out.println("=====================================");
+
+                System.out.println("Digite a posição da tarefa:");
+                int remover = teclado.nextInt();
+
+                if (remover >= 0 && remover < tamanhoLista) {
+
+                    lista[remover] = null;
+
+                    System.out.println("Tarefa removida!");
+
+                } else {
+
+                    System.out.println("Posição inválida!");
+
+                }
+
+            }
+            
+            //3.CONCLUIR.TAREFA
+            if(selecionar == 3) {
+            	System.out.println("Qual tafefa você deseja concluir?: ");
+            	int numero = teclado.nextInt();
+            	concluir(lista, numero);//chamada.de.metodo
+            }
+
+            // 5.ENCERRA.O.PROGRAMA
+            if (selecionar == 5) {
 
                 System.out.println("Programa encerrado!");
 
@@ -50,8 +85,8 @@ public class Lista {
 
     }
 
-    //PASSO1-ADICIONAR.TAREFA
-	public static void adicionar(int selecionar, int tamanhoLista) {
+    // PASSO1-ADICIONAR.TAREFA
+    public static void adicionar(String[] lista, int tamanhoLista) {
 
         Scanner teclado = new Scanner(System.in);
 
@@ -59,20 +94,16 @@ public class Lista {
         System.out.println("-----------LISTA DE TAREFAS----------");
         System.out.println("=====================================");
 
-        String[] lista = new String[tamanhoLista];
-
-        teclado.nextLine();
-
-        System.out.println("Digite a sua tarefa:");
-
-        //Adicionar.as.tarefas
+        // Adicionar.as.tarefas
         for (int i = 0; i < tamanhoLista; i++) {
+
+            System.out.println("Digite a sua tarefa:");
 
             lista[i] = teclado.nextLine();
 
         }
 
-        //Mostrar.as.tarefas
+        // Mostrar.as.tarefas
         for (int i = 0; i < tamanhoLista; i++) {
 
             System.out.println(lista[i]);
@@ -80,5 +111,19 @@ public class Lista {
         }
 
     }
+    
+    //PASSO2-CONCLUIR.TAREFA
+    public static void concluir(String[] lista, int numero) {
+    	int indice = numero - 1;
+    	
+    	if (indice >= 0 && indice < lista.length && lista[indice] != null) {
+    		lista[indice] = lista[indice] + " [OK]";
+    	
+    	}else{
+    		System.out.println("Tarefa não encontrada ou posição vazia!");
+	 
+ }
 
+}
+    	
 }
