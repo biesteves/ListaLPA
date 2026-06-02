@@ -6,10 +6,10 @@ public class Lista {
 
     // PASSO1-MENU.PRINCIPAL
     public static void main(String[] args) {
+    	Scanner teclado = new Scanner(System.in);
 
-        Scanner teclado = new Scanner(System.in);
-
-        int selecionar = 0;
+        //Usuaruio.selecionar.o.tamanho.da.lista
+    	int selecionar = 0;
         int tamanhoLista;
 
         System.out.println("=====================================");
@@ -21,15 +21,16 @@ public class Lista {
         String[] lista = new String[tamanhoLista];
 
         // mantem.o.programa.funcionando
-        while (selecionar != 5) {
+        while (selecionar != 6) {
 
             System.out.println("=====================================");
             System.out.println("-----------LISTA DE TAREFAS----------");
             System.out.println("(1): ADICIONAR TAREFA ");//OK
             System.out.println("(2): REMOVER TAREFA");//OK
             System.out.println("(3): CONCLUIR TAREFA");//OK
-            System.out.println("(4): MODIFICAR");//AGORA OK!
-            System.out.println("(5): SAIR");//OK
+            System.out.println("(4): MOSTRAR AS TAREFAS");
+            System.out.println("(5): MODIFICAR");//OK
+            System.out.println("(6): SAIR");//OK
             System.out.println("=====================================");
             System.out.println("Digite um número para selecionar:");
             System.out.println("=====================================");
@@ -39,93 +40,150 @@ public class Lista {
             // 1.ADICIONAR
             if (selecionar == 1) {
                 adicionar(lista, tamanhoLista);
+
             }
 
             // 2.REMOVER.TAREFA
             if (selecionar == 2) {
-                System.out.println("=====================================");
-                System.out.println("-----------REMOVER TAREFA------------");
-                System.out.println("=====================================");
+            	  System.out.println("=====================================");
+                  System.out.println("-----------LISTA DE TAREFAS----------");
+                  System.out.println("=====================================");
+	              System.out.println("");//pular.mais.de.uma.linha
+	              System.out.println("=====================================");
+	              System.out.println("-----------REMOVER TAREFA------------");
+	              System.out.println("=====================================");
 
                 System.out.println("Digite a posição da tarefa:");
                 int remover = teclado.nextInt();
 
                 if (remover >= 0 && remover < tamanhoLista) {
+
                     lista[remover] = null;
+
                     System.out.println("Tarefa removida!");
+
                 } else {
+
                     System.out.println("Posição inválida!");
+
                 }
+
             }
             
-            // 3.CONCLUIR.TAREFA
-            if (selecionar == 3) {
-                System.out.println("Qual tarefa você deseja concluir?: ");
-                int numero = teclado.nextInt();
-                concluir(lista, numero);
+            //3.CONCLUIR.TAREFA
+            if(selecionar == 3) {
+            	System.out.println("Qual tafefa você deseja concluir?: ");
+            	int numero = teclado.nextInt();
+            	concluir(lista, numero);//chamada.de.metodo
             }
+            //4.MOSTRAR.TAREFA
+            if(selecionar == 4) {
+            	System.out.println("===================================");
+            	System.out.println("----------LISTA DE TAREFAS---------");
+            	System.out.println("===================================");
+	            System.out.println("");//pular.mais.de.uma.linha
+            	System.out.println("===================================");
+	            System.out.println("-----------MOSTRAR TAREFAS----------");
+	            System.out.println("===================================");
+            	
+            	mostrarLista(lista);//chamada.de.metodo
 
-            // 4.MODIFICAR (Adicionado corretamente dentro do bloco while do main)
-            if (selecionar == 4) {
-                modificar(lista, tamanhoLista);
+            }
+            
+            //5.MODIFICAR.TAREFA
+            if(selecionar == 5) {
+            	System.out.println("Qual tarefa você deseja concluir (número da tarefa)?: ");
+            	int numero = teclado.nextInt();
+            	modificar(lista, tamanhoLista);
             }
 
             // 5.ENCERRA.O.PROGRAMA
-            if (selecionar == 5) {
+            if (selecionar == 6) {
+
                 System.out.println("Programa encerrado!");
+
             }
+
         }
+
     }
 
     // PASSO1-ADICIONAR.TAREFA
     public static void adicionar(String[] lista, int tamanhoLista) {
+
         Scanner teclado = new Scanner(System.in);
 
         System.out.println("=====================================");
         System.out.println("-----------LISTA DE TAREFAS----------");
         System.out.println("=====================================");
+        System.out.println("");//pular.mais.de.uma.linha
+        System.out.println("==============================");
+        System.out.println("-------ADICIONAR TAREFA-------");
+        System.out.println("==============================");
 
+        // Adicionar.as.tarefas
         for (int i = 0; i < tamanhoLista; i++) {
+
             System.out.println("Digite a sua tarefa:");
+
             lista[i] = teclado.nextLine();
+
         }
 
+        // Mostrar.as.tarefas
         for (int i = 0; i < tamanhoLista; i++) {
+
             System.out.println(lista[i]);
+
         }
+
     }
     
-    // 3. METODO CONCLUIR
+    //PASSO3-CONCLUIR.TAREFA
     public static void concluir(String[] lista, int numero) {
-        int indice = numero - 1; // Ajusta caso o usuário pense em listas começando de 1
-        
-        if (indice >= 0 && indice < lista.length && lista[indice] != null) {
-            lista[indice] = lista[indice] + " [OK]";
-            System.out.println("Tarefa concluída!");
-        } else {
-            System.out.println("Tarefa não encontrada ou posição vazia!");
-        }
-    }
+    	int indice = numero - 1;
+    	
+    	if (indice >= 0 && indice < lista.length && lista[indice] != null) {
+    		lista[indice] = lista[indice] + " [OK]";
+    	
+    	}else{
+    		System.out.println("Tarefa não encontrada ou posição vazia!");
+	 
+ }
 
-    // 4. METODO MODIFICAR (Criado de forma independente e com correção do buffer)
+}
+    //4.MOSTRAR.TAREFA
+    public static void mostrarLista(String[] lista) {
+    	for (int i = 0; i < lista.length; i++) {
+    		System.out.println(i + "-" + lista[i]);
+    	}
+    	
+    }
+    
+    //PASSO5-MODIFICAR.TAREFA
     public static void modificar(String[] lista, int tamanhoLista) {
-        Scanner teclado = new Scanner(System.in);
-        
+    	Scanner teclado = new Scanner(System.in);
+
+        System.out.println("=====================================");
+        System.out.println("-----------LISTA DE TAREFAS----------");
+        System.out.println("=====================================");
+        System.out.println("");//pular.mais.de.uma.linha
         System.out.println("==============================");
-        System.out.println("---------Modificar-------------");
+        System.out.println("---------MODIFICAR------------");
         System.out.println("==============================");
         
         System.out.println("Digite a posição da tarefa ");
         int posicao = teclado.nextInt();
-
-        teclado.nextLine(); 
+        
+        teclado.nextLine();//
         
         if (posicao >= 0 && posicao < tamanhoLista) {
-            System.out.println("Digite a nova tarefa:");
-            lista[posicao] = teclado.nextLine();
-            System.out.println("Tarefa modificada com sucesso!");
-        } else {
-            System.out.println("Posição inválida!");
+        	System.out.println("Digite a nova tarefa:");
+        	lista[posicao] = teclado.nextLine();
+        	System.out.println("Tarefa modificada com sucesso!");
+        }else {
+        	 System.out.println("Posição inválida! Tente Novamente.");
         }
     }
+    	
 }
