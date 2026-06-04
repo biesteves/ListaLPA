@@ -39,6 +39,13 @@ public class Lista {
 
             selecionar = teclado.nextInt();
 
+            for (int i = 0; i < 30; i++) {
+
+                System.out.println();
+
+            }
+            
+            
             // 1.ADICIONAR
             if (selecionar == 1) {
                 	adicionar(lista, tamanhoLista);
@@ -53,24 +60,18 @@ public class Lista {
             
             //3.CONCLUIR.TAREFA
             if(selecionar == 3) {
-            	System.out.println("Qual tafefa você deseja concluir?: ");
-            	int numero = teclado.nextInt();
-            	concluir(lista, numero);//chamada.de.metodo
+            	concluir(lista);//chamada.de.metodo
             }
             //4.MOSTRAR.TAREFA
             if(selecionar == 4) {
-            	System.out.println("===================================");
-	            System.out.println("-----------MOSTRAR TAREFAS----------");
-	            System.out.println("===================================");
             	mostrarLista(lista);//chamada.de.metodo
 
             }
             
             //5.MODIFICAR.TAREFA
             if(selecionar == 5) {
-            	System.out.println("Qual tarefa você deseja modificar?: ");
-            	int numero = teclado.nextInt();
             	modificar(lista, tamanhoLista);
+            	
             }
 
             // 5.ENCERRA.O.PROGRAMA
@@ -82,6 +83,7 @@ public class Lista {
 
         }
 
+        //teclado.close();
     }
 
     // PASSO1-ADICIONAR.TAREFA
@@ -95,7 +97,7 @@ public class Lista {
         // Adicionar.as.tarefas
         for (int i = 0; i < tamanhoLista; i++) {
 
-            System.out.println("Digite a sua tarefa" +  (i)+ ":");//mostar.o.numero.na.tabela
+            System.out.println("Digite a sua tarefa " +  (i)+ ":");//mostar.o.numero.na.tabela
 
             lista[i] = teclado.nextLine();
 
@@ -125,46 +127,62 @@ public class Lista {
     
     
     //PASSO3-CONCLUIR.TAREFA
-    public static void concluir(String[] lista, int numero) {
-    	int indice = numero - 1;
-    	
-    	if (indice >= 0 && indice < lista.length && lista[indice] != null) {
-    		lista[indice] = lista[indice] + " [X]";
-    	
-    	}else{
-    		System.out.println("Tarefa não encontrada ou posição vazia!");
-	 
- }
+    public static void concluir(String[] lista) {
+    	 Scanner teclado = new Scanner(System.in);
 
-}
+    	    System.out.println("==============================");
+    	    System.out.println("------CONCLUIR TAREFA---------");
+    	    System.out.println("==============================");
+
+    	    System.out.println("Qual tarefa você deseja concluir?");
+    	    int numero = teclado.nextInt();
+
+    	    int indice = numero - 1;
+
+    	    if (indice >= 0 && indice < lista.length && lista[indice] != null) {
+    	        lista[indice] = lista[indice] + " [X]";
+    	        System.out.println("Tarefa concluída com sucesso!");
+    	    } else {
+    	        System.out.println("Tarefa não encontrada ou posição vazia!");
+    	    }
+    }
     //4.MOSTRAR.TAREFA
     public static void mostrarLista(String[] lista) {
-    	for (int i = 0; i < lista.length; i++) {
-    		System.out.println( i + "- " + lista[i]);
+    	   System.out.println("===================================");
+    	    System.out.println("---------MOSTRAR TAREFAS-----------");
+    	    System.out.println("===================================");
+
+    	    for (int i = 0; i < lista.length; i++) {
+    	        System.out.println(i + " - " + lista[i]);
+    	    }
     	}
-    	
-    }
     
     //PASSO5-MODIFICAR.TAREFA
     public static void modificar(String[] lista, int tamanhoLista) {
     	Scanner teclado = new Scanner(System.in);
 
         System.out.println("==============================");
-        System.out.println("------MODIFICAR TAREFAS-----");
+        System.out.println("------MODIFICAR TAREFA--------");
         System.out.println("==============================");
-        
-        System.out.println("Digite a posição da tarefa ");
+
+        System.out.println("Digite a posição da tarefa:");
         int posicao = teclado.nextInt();
-        
-        teclado.nextLine();//
-        
+
+        teclado.nextLine();
+
         if (posicao >= 0 && posicao < tamanhoLista) {
-        	System.out.println("Digite a nova tarefa:");
-        	lista[posicao] = teclado.nextLine();
-        	System.out.println("Tarefa modificada com sucesso!");
-        }else {
-        	 System.out.println("Posição inválida! Tente Novamente.");
+
+            System.out.println("Digite a nova tarefa:");
+            lista[posicao] = teclado.nextLine();
+
+            System.out.println("Tarefa modificada com sucesso!");
+
+        } else {
+
+            System.out.println("Posição inválida! Tente novamente.");
+
         }
     }
-    	
-}
+    }
+
+    
