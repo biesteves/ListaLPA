@@ -18,12 +18,12 @@ public class Lista {
 
         tamanhoLista = teclado.nextInt();
 
-        String[] lista = new String[tamanhoLista];
+        String[] lista = new String[tamanhoLista];//chamada.de.vetor.para.LISTA
         char[] prioridade = new char[tamanhoLista];//chamada.de.vetor.para.PRIORIDADE
         boolean[] concluida = new boolean[tamanhoLista];//chamada.de.vetor.para.CONCLUIDA
 
         // mantem.o.programa.funcionando
-        while (selecionar != 6) {
+        while (selecionar != 8) {
 
             System.out.println("=====================================");
             System.out.println("-----------LISTA DE TAREFAS----------");
@@ -33,7 +33,9 @@ public class Lista {
             System.out.println("(3): CONCLUIR TAREFA");
             System.out.println("(4): MOSTRAR AS TAREFAS");
             System.out.println("(5): MODIFICAR");
-            System.out.println("(6): SAIR");
+            System.out.println("(6): LIMPAR LISTA");
+            System.out.println("(7): ESTATÍSTICAS");
+            System.out.println("(8): SAIR");
             System.out.println("");//pula.uma.linha
             System.out.println("=====================================");
             System.out.println("Digite um número para selecionar:");
@@ -43,14 +45,12 @@ public class Lista {
             
             // 1.ADICIONAR
             if (selecionar == 1) {
-                	adicionar(lista, prioridade,concluida,tamanhoLista);//chamada.de.metodo
-
+                adicionar(lista, prioridade,concluida,tamanhoLista);//chamada.de.metodo
             }
 
             // 2.REMOVER.TAREFA
             if (selecionar == 2) {
-            		removerTarefa(lista, tamanhoLista);//chamada.de.metodo
-
+            	removerTarefa(lista, tamanhoLista);//chamada.de.metodo
             }
             
             //3.CONCLUIR.TAREFA
@@ -60,20 +60,26 @@ public class Lista {
             //4.MOSTRAR.TAREFA
             if(selecionar == 4) {
             	mostrarLista(lista, prioridade, concluida);//chamada.de.metodo
-
             }
             
             //5.MODIFICAR.TAREFA
             if(selecionar == 5) {
-            	modificar(lista, prioridade, concluida, tamanhoLista);//chamada.de.metodo
-            	
+            	modificar(lista, prioridade, concluida, tamanhoLista);//chamada.de.metodo          	
+            }
+            
+            //6.LIMPAR.LISTA
+            if (selecionar == 6) {
+            	limpar(lista, prioridade, concluida);
+            }
+            
+            //7.MOSTRAR.ESTATÍSTICAS.DAS.TAREFAS
+            if (selecionar == 7) {
+            	estatisticas(lista, concluida);
             }
 
-            // 5.ENCERRA.O.PROGRAMA
-            if (selecionar == 6) {
-
+            // 8.ENCERRA.O.PROGRAMA
+            if (selecionar == 8) {
                 System.out.println("Programa encerrado!");
-
             }
 
         }
@@ -110,17 +116,18 @@ public class Lista {
     
     //PASSO2-REMOVER.TAREFA
     public static void removerTarefa(String[] lista, int tamanhoLista) {
-    	Scanner teclado = new Scanner(System.in);
-    	
-    	System.out.println("Digite a posição da tarefa:");
+
+        Scanner teclado = new Scanner(System.in);
+
+        System.out.println("Digite a posição da tarefa:");
         int remover = teclado.nextInt();
+
         int indice = remover - 1;
 
-        
-        
-        if (remover >= 0 && remover < tamanhoLista) {
+        if (indice >= 0 && indice < tamanhoLista) {
 
-            lista[remover] = null;
+            lista[indice] = null;
+
             System.out.println("Tarefa removida!");
 
         } else {
@@ -223,6 +230,52 @@ public class Lista {
     	    }
     	    
     }
+
+    //PASSO6-LIMPAR.LISTA
+    public static void limpar(String[] lista, char[] prioridade, boolean[] concluida) {
+    	for(int i = 0; i < lista.length; i++){
+            lista[i] = null;
+            prioridade[i] = ' ';
+            concluida[i] = false;
+        }
+
+        System.out.println("Lista limpa!");
+    }   
+    //PASSO7-MOSTRAR.ESTATISTICAS
+	    public static void estatisticas(String[] lista, boolean[] concluida) {
+			int total = 0;
+			int concluidas = 0;
+			int pendentes = 0;
+		
+			for(int i = 0; i < lista.length; i++) {
+				
+				if(lista[i] != null) {
+				
+				total++;
+				
+				if(concluida[i]) {
+					concluidas++;
+				} else {
+					pendentes++;
+				}
+				
+			}
+		}
+		
+		double percentual = 0;
+		
+		if(total > 0) {
+		percentual = (concluidas * 100.0) / total;
+		}
+		
+		System.out.println("===== ESTATÍSTICAS =====");
+		System.out.println("Total de tarefas: " + total);
+		System.out.println("Concluídas: " + concluidas);
+		System.out.println("Pendentes: " + pendentes);
+		System.out.println("Percentual concluído: " + percentual + "%");
+	}
+    
+    
 }
     
     	
